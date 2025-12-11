@@ -359,7 +359,7 @@ main .inner {
 #community .sub_title {
     font-size: 24px;
     color: #fff;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 #community .more {
@@ -372,7 +372,57 @@ main .inner {
     padding: 0 20px;
     height: 60px;
     line-height: 60px;
-    color:#000;
+    color: #000;
     border-radius: 32px 0;
 }
 
+#community ul {
+    display: flex;
+    gap: 40px;
+}
+
+#community li {
+    width: calc((100% - 40px * 3) / 4);
+}
+
+#community img {
+    width: 100%;
+    transition: all .3s;
+}
+
+#community .imgbox {
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+#community li:hover img {
+    box-shadow: 0 8px 21px #0003;
+    transform: scale(1.05);
+}
+
+#community .title {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#community .info {
+    margin-top: 20px;
+}
+
+#community .date {
+    font-size: 14px;
+    color:#666;
+}
+
+#community .subject {
+    margin-left: 10px;
+    color:#0e7876;
+    font-weight: bold;
+}
