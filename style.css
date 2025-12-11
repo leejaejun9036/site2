@@ -1,0 +1,378 @@
+:root {
+    font-family: "Pretendard GOV Variable";
+    --main: #0e7876;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: top;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+header {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+header #link ul {
+    list-style: none;
+}
+
+header #link {
+    border-bottom: 1px solid #efefef;
+}
+
+header #link ul {
+    display: flex;
+    justify-content: flex-end;
+}
+
+header #link a {
+    font-size: 14px;
+    color: #757575;
+    padding: 0 10px;
+    height: 30px;
+    display: block;
+    line-height:
+        30px;
+    text-decoration: none;
+}
+
+header #link a:hover {
+    text-decoration: underline;
+}
+
+header .inner {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header #gnb>ul {
+    display: flex;
+    gap: 16px;
+}
+
+header #gnb li {
+    position: relative;
+}
+
+header #gnb .menu {
+    font-size: 22px;
+    color: #333;
+    font-weight: bold;
+    letter-spacing: -1px;
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    position: relative;
+}
+
+header #gnb .menu:hover {
+    color: var(--main);
+}
+
+header #gnb .menu::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--main);
+    border-radius: 50%;
+    top: 20px;
+    left: 50%;
+    margin-left: -3px;
+    opacity: 0;
+    transition: all .2s;
+}
+
+header #gnb .menu:hover::before {
+    opacity: 1;
+    top: 8px;
+}
+
+header #gnb li .sub {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    border: 1px solid var(--main);
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 20px;
+    width: 250px;
+    box-sizing: border-box;
+    /*보더영역 까지 크기조절 된다*/
+    box-shadow: 0 0 24px #0003;
+    opacity: 0;
+    visibility: hidden;
+}
+
+header #gnb li:hover .sub {
+    opacity: 1;
+    top: 60px;
+    visibility: visible;
+    transition: all .3s;
+}
+
+
+header #gnb li .sub a:hover {
+    color: var(--main);
+}
+
+header #gnb li .sub a {
+    font-size: 18px;
+    line-height: 30px;
+    color: #333;
+    font-weight: bold;
+    padding-left: 25px;
+}
+
+header #gnb li .sub a:hover::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--main);
+    border-radius: 50%;
+    position: absolute;
+    top: 11px;
+    left: 6px;
+}
+
+header #user ul {
+    display: flex;
+    gap: 15px;
+}
+
+main {
+    margin: 0 auto;
+    border: 5px solid #000;
+}
+
+#search {
+    margin: 60px 0;
+    border: 1px solid var(--main);
+    padding: 5px 20px 5px 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 16px #0001;
+}
+
+#search p {
+    display: flex;
+}
+
+#search input {
+    font-size: 18px;
+    height: 60px;
+    color: #333;
+    border: 0;
+    flex-grow: 1;
+}
+
+#search button {
+    width: 50px;
+    border: 0;
+    font-size: 0;
+    background: url("./04익산시민기록관/images/ico-archive-search.png") no-repeat center;
+}
+
+#history ul {
+    display: flex;
+    padding: 20px;
+    background: #ebf4f1;
+    border-radius: 16px;
+    justify-content: space-between;
+}
+
+#history ul img {
+    border-radius: 50%;
+}
+
+#history ul li:hover {
+    box-shadow: 0px 13px 17.2px 2.2px #0003;
+}
+
+#history {
+    padding-bottom: 50px;
+}
+
+
+#online h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#online b {
+    font-weight: bold;
+}
+
+#online h2 a {
+    width: 49px;
+    height: 49px;
+    border: 1px solid #ccc;
+    background: url("./04익산시민기록관/images/more-plus.png") no-repeat center center;
+    border-radius: 50%;
+    font-size: 0px;
+}
+
+#online ul {
+    display: flex;
+    gap: 40px;
+}
+
+#online li {
+    width: calc((100% - 40px * 3) / 4);
+}
+
+#online li .imgbox {
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+#online li:hover .imgbox {
+    box-shadow: 0 8px 21px #0003;
+}
+
+#online img {
+    width: 100%;
+    transition: all .3s;
+}
+
+#online li:hover img {
+    transform: scale(1.05);
+}
+
+#online .title {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+#collection {
+    margin: 80px 0 120px;
+}
+
+#collection h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#collection b {
+    font-weight: bold;
+}
+
+#collection h2 a {
+    width: 49px;
+    height: 49px;
+    border: 1px solid #ccc;
+    background: url("./04익산시민기록관/images/more-plus2.png")no-repeat center center;
+    border-radius: 50%;
+    font-size: 0px;
+}
+
+#collection ul {
+    display: flex;
+    gap: 40px;
+}
+
+#collection li {
+    width: calc((100% - 40px * 2) / 3);
+}
+
+#collection li .imgbox {
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+#collection li:hover .imgbox {
+    box-shadow: 0 8px 21px #0003;
+}
+
+#collection img {
+    width: 100%;
+    transition: all .3s;
+}
+
+#collection li:hover img {
+    transform: scale(1.05);
+}
+
+#collection .title {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.community_wrapper {
+    height: 500px;
+    padding-top: 60px;
+    background: #14a677;
+}
+
+main .inner {
+    width: 1400px;
+    margin: 0 auto;
+    border: 5px solid #f00;
+}
+
+#community {
+    width: 1400px;
+    margin: 0 auto;
+    outline: 2px solid #00f;
+    position: relative;
+}
+
+#community h2 {
+    font-size: 30px;
+    color: #fff;
+    margin-bottom: 20px;
+
+}
+
+#community .sub_title {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 60px;
+}
+
+#community .more {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    font-weight: bold;
+    background: #ffd044;
+    padding: 0 20px;
+    height: 60px;
+    line-height: 60px;
+    color:#000;
+    border-radius: 32px 0;
+}
+
