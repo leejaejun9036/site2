@@ -157,7 +157,12 @@ header #user ul {
 
 main {
     margin: 0 auto;
-    border: 5px solid #000;
+    
+}
+
+#main_view{
+    width:1400px;
+    height:550px;
 }
 
 #search {
@@ -331,21 +336,28 @@ main {
 }
 
 .community_wrapper {
-    height: 500px;
+    position: relative;    
     padding-top: 60px;
     background: #14a677;
+    background: linear-gradient(#14a677 70%,white 70%);
+}
+
+.community_wrapper::before {
+    content:url("./04익산시민기록관/images/bg-community.png");
+    position: absolute; top:-76px; right:0;
+
 }
 
 main .inner {
     width: 1400px;
     margin: 0 auto;
-    border: 5px solid #f00;
+    
 }
 
 #community {
     width: 1400px;
     margin: 0 auto;
-    outline: 2px solid #00f;
+    
     position: relative;
 }
 
@@ -374,6 +386,11 @@ main .inner {
     line-height: 60px;
     color: #000;
     border-radius: 32px 0;
+}
+
+#community .more img{
+    width:24px;
+    vertical-align: -5px;
 }
 
 #community ul {
@@ -426,3 +443,4 @@ main .inner {
     color:#0e7876;
     font-weight: bold;
 }
+

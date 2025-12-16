@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -64,8 +67,22 @@
 
     <main>
         <div class="inner">
-            <section id="main_view">
-                <p><img src="./04익산시민기록관/images/메인배너2_공모전2회.png" alt="메인뷰"></p>
+            <!-- Slider main container -->
+            <section id="main_view" class="swiper">
+                <!-- Additional required wrapper -->
+                <ul class="swiper-wrapper">
+                    <!-- Slides -->
+                    <li class="swiper-slide"><img src="./04익산시민기록관/images/메인배너2_공모전1회.png" alt=""></li>
+                    <li class="swiper-slide"><img src="./04익산시민기록관/images/./메인배너2_공모전2회.png" alt=""></li>
+                    <li class="swiper-slide"><img src="./04익산시민기록관/images/메인배너2_공모전3회.png" alt=""></li>
+                    <li class="swiper-slide"><img src="./04익산시민기록관/images/./메인+3.png" alt=""></li>
+                </ul>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </section>
 
             <section id="search">
@@ -134,9 +151,9 @@
 
         <div class="community_wrapper">
             <section id="community">
-             <h2>함께 만드는 지도</h2>
+                <h2>함께 만드는 지도</h2>
                 <p class="sub_title">'어디서나, 누구나' 익산에 대한 기록을 남길 수 있는</p>
-                <a href="#" class="more">함께 만드는 지도 바로가기</a>
+                <a href="#" class="more">함께 만드는 지도 바로가기<img src="./04익산시민기록관/images/arrow.png.svg" alt=""></a>
                 <ul>
                     <li>
                         <p class="imgbox"><img src="./04익산시민기록관/images/community_01.png" alt=""></p>
@@ -144,7 +161,7 @@
                         <p class="info">
                             <span class="date">2024-01-04</span>
                             <span class="subject">공모전 기록물</span>
-                        </p>     
+                        </p>
                     </li>
                     <li>
                         <p class="imgbox"><img src="./04익산시민기록관/images/community_02.png" alt=""></p>
@@ -152,7 +169,7 @@
                         <p class="info">
                             <span class="date">2024-01-04</span>
                             <span class="subject">공모전 기록물</span>
-                        </p>     
+                        </p>
                     </li>
                     <li>
                         <p class="imgbox"><img src="./04익산시민기록관/images/community_03.png" alt=""></p>
@@ -160,7 +177,7 @@
                         <p class="info">
                             <span class="date">2024-01-04</span>
                             <span class="subject">공모전 기록물</span>
-                        </p>     
+                        </p>
                     </li>
                     <li>
                         <p class="imgbox"><img src="./04익산시민기록관/images/community_04.png" alt=""></p>
@@ -168,7 +185,7 @@
                         <p class="info">
                             <span class="date">2024-01-04</span>
                             <span class="subject">공모전 기록물</span>
-                        </p>     
+                        </p>
                     </li>
                 </ul>
             </section>
@@ -176,6 +193,32 @@
 
     </main>
 
+   
+<script> 
+    const swiper = new Swiper('.swiper', {
+  // Optional parameters
+
+  loop: true,
+   effect: "fade" ,
+  
+   autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+   },
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+    type: "fraction",
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+}); //swiper 종료
+</script>
 </body>
 
 </html>

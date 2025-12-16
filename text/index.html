@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>국민연금공단 - 와이어프레임 시안</title>
+  <style>
+    :root{
+      --brand:#2f47c6;        /* 상단 네비 블루 */
+      --brand2:#1e2c7a;       /* 딥블루 배경 */
+      --bg:#ffffff;
+      --ink:#111827;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --card:#ffffff;
+      --soft:#f6f7fb;
+      --cream:#fbf7ef;
+      --mint:#eef6f3;
+      --pill:#f2f4ff;
+      --shadow: 0 10px 30px rgba(17,24,39,.08);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1400px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.4;
+    }
+    a{ color:inherit; text-decoration:none; }
+    button, input{ font:inherit; }
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    /* TOP NAV */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:var(--brand);
+      color:#fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    }
+    .topbar .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      height:56px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:-.2px;
+      white-space:nowrap;
+    }
+    .brand-badge{
+      width:30px; height:30px; border-radius:10px;
+      background:rgba(255,255,255,.18);
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.22);
+    }
+    .brand-badge svg{ width:18px; height:18px; fill:#fff; opacity:.95; }
+    .navlinks{
+      display:flex; align-items:center; gap:22px;
+      opacity:.95;
+      font-weight:600;
+      font-size:14px;
+    }
+    .navlinks a{ opacity:.92; }
+    .navlinks a:hover{ opacity:1; text-decoration:underline; text-underline-offset:4px; }
+    .top-utils{
+      display:flex; align-items:center; gap:10px;
+    }
+    .util-btn{
+      height:34px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .util-btn:hover{ background:rgba(255,255,255,.18); }
+
+    /* HERO */
+    .hero{
+      background: linear-gradient(100deg, #f7efe1 0%, #e8f3f0 55%, #e7eefc 100%);
+      padding:28px 0 22px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+      min-height:260px;
+    }
+    .hero-left{
+      padding:24px;
+      border-radius:var(--radius2);
+      background:rgba(255,255,255,.38);
+      border:1px solid rgba(255,255,255,.55);
+      box-shadow: var(--shadow);
+    }
+    .hero-title{
+      font-size:42px;
+      line-height:1.05;
+      margin:0 0 10px;
+      letter-spacing:-1px;
+    }
+    .hero-sub{
+      margin:0 0 16px;
+      color:rgba(17,24,39,.78);
+      font-weight:600;
+      max-width:55ch;
+    }
+    .hero-cta{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
+      border:0;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow: 0 10px 20px rgba(47,71,198,.18);
+    }
+    .btn.primary{ background:var(--brand); color:#fff; }
+    .btn.ghost{
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(17,24,39,.1);
+      box-shadow:none;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .search-card{
+      background:#fff;
+      border-radius:var(--radius2);
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .search-card .mascot{
+      width:46px; height:46px;
+      border-radius:18px;
+      background:linear-gradient(180deg, rgba(47,71,198,.12), rgba(47,71,198,.04));
+      border:1px solid rgba(47,71,198,.18);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+    }
+    .search-card .mascot svg{ width:26px; height:26px; }
+    .search-input{
+      flex:1;
+      height:44px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      padding:0 14px;
+      outline:none;
+      background:#fff;
+      font-weight:700;
+    }
+    .search-input:focus{ border-color: rgba(47,71,198,.55); box-shadow: 0 0 0 4px rgba(47,71,198,.12); }
+    .icon-btn{
+      width:44px; height:44px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      display:grid; place-items:center;
+    }
+    .icon-btn:hover{ border-color: rgba(47,71,198,.45); box-shadow: 0 8px 18px rgba(0,0,0,.08); }
+    .login-card{
+      background:#fff;
+      border-radius:var(--radius2);
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .login-head{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .login-head strong{ font-size:14px; }
+    .login-meta{ font-size:12px; color:var(--muted); font-weight:700; }
+    .login-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .chip{
+      border-radius:14px;
+      background:var(--soft);
+      border:1px solid rgba(17,24,39,.06);
+      padding:12px;
+      font-weight:800;
+      font-size:13px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .chip span{ color:var(--muted); font-weight:800; font-size:12px; }
+
+    /* QUICK ICONS */
+    .quick-wrap{
+      padding:18px 0 8px;
+      background:#fff;
+    }
+    .quick-top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:12px 0 10px;
+    }
+    .pill{
+      background:var(--pill);
+      border:1px solid rgba(47,71,198,.18);
+      color:var(--brand);
+      font-weight:900;
+      font-size:12px;
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .quickbar{
+      border-radius:999px;
+      background:#fff;
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      overflow:auto;
+      scrollbar-width:none;
+    }
+    .quickbar::-webkit-scrollbar{ display:none; }
+    .qitem{
+      min-width:120px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .qitem:hover{
+      background: rgba(47,71,198,.06);
+      border-color: rgba(47,71,198,.16);
+    }
+    .qicon{
+      width:34px; height:34px;
+      border-radius:14px;
+      background:rgba(47,71,198,.08);
+      border:1px solid rgba(47,71,198,.18);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+    }
+    .qicon svg{ width:18px; height:18px; }
+    .qtext b{ display:block; font-size:13px; }
+    .qtext small{ display:block; font-size:12px; color:var(--muted); font-weight:700; }
+
+    /* SECTION TITLES */
+    .section{
+      padding:34px 0;
+      background: #fff;
+    }
+    .section.alt{ background: var(--mint); }
+    .section.cream{ background: var(--cream); }
+    .sec-title{
+      text-align:center;
+      margin:0 0 6px;
+      font-size:28px;
+      letter-spacing:-.6px;
+    }
+    .sec-sub{
+      text-align:center;
+      margin:0 0 22px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    /* FEATURE CARDS (2-up) */
+    .feature-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      max-width:980px;
+      margin:0 auto;
+    }
+    .feature-card{
+      background:#f7e6bf;
+      border-radius:22px;
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:18px;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      min-height:220px;
+    }
+    .feature-top{
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .badge{
+      background:rgba(17,24,39,.08);
+      border:1px solid rgba(17,24,39,.08);
+      color:rgba(17,24,39,.8);
+      font-weight:900;
+      font-size:12px;
+      border-radius:999px;
+      padding:6px 10px;
+    }
+    .feature-ico{
+      width:64px; height:64px; border-radius:18px;
+      background:rgba(255,255,255,.65);
+      border:1px solid rgba(17,24,39,.10);
+      display:grid; place-items:center;
+    }
+    .feature-ico svg{ width:34px; height:34px; }
+    .feature-card h3{
+      margin:12px 0 6px;
+      font-size:18px;
+      letter-spacing:-.3px;
+    }
+    .feature-card p{
+      margin:0;
+      color:rgba(17,24,39,.75);
+      font-weight:700;
+      font-size:13px;
+    }
+    .feature-card .btnrow{
+      margin-top:14px;
+      display:flex; justify-content:flex-start;
+    }
+
+    /* SERVICES / TABS */
+    .tabs{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      margin:6px 0 14px;
+      flex-wrap:wrap;
+    }
+    .tab{
+      border-radius:999px;
+      padding:10px 14px;
+      border:1px solid rgba(17,24,39,.10);
+      background:#fff;
+      font-weight:900;
+      cursor:pointer;
+      color:rgba(17,24,39,.86);
+    }
+    .tab[aria-selected="true"]{
+      border-color: rgba(47,71,198,.45);
+      box-shadow: 0 0 0 4px rgba(47,71,198,.12);
+      color:var(--brand);
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap:12px;
+      margin-top:10px;
+    }
+    .service-card{
+      background:#fff;
+      border-radius:18px;
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:12px;
+      min-height:96px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      cursor:pointer;
+    }
+    .service-card:hover{ transform: translateY(-2px); }
+    .service-card .mini{
+      width:28px;height:28px;border-radius:10px;
+      background:rgba(47,71,198,.10);
+      border:1px solid rgba(47,71,198,.18);
+      display:grid; place-items:center;
+    }
+    .service-card b{ font-size:13px; letter-spacing:-.2px; }
+    .service-card small{ color:var(--muted); font-weight:800; font-size:12px; }
+
+    /* BIG CHART SECTION */
+    .big-visual{
+      background: linear-gradient(180deg, #2b2f86 0%, #13164a 100%);
+      padding:40px 0;
+      color:#fff;
+    }
+    .big-visual h2{
+      text-align:center;
+      margin:0 0 14px;
+      letter-spacing:-.6px;
+    }
+    .panel{
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:26px;
+      padding:18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+      max-width:1040px;
+      margin:0 auto;
+    }
+    .panel-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .panel-top .filters{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .select{
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:13px;
+      outline:none;
+    }
+    .chart{
+      background:#fff;
+      border-radius:22px;
+      padding:18px;
+      color:var(--ink);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .bars{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:16px;
+      align-items:end;
+      height:190px;
+      margin-top:8px;
+    }
+    .bar{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .bar .stick{
+      width:64px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(47,71,198,.35), rgba(47,71,198,.92));
+      border:1px solid rgba(47,71,198,.25);
+      box-shadow: 0 18px 28px rgba(47,71,198,.18);
+    }
+    .bar:nth-child(4) .stick{
+      background: linear-gradient(180deg, rgba(16,185,129,.30), rgba(16,185,129,.92));
+      border-color: rgba(16,185,129,.25);
+      box-shadow: 0 18px 28px rgba(16,185,129,.18);
+    }
+    .bar b{ font-size:12px; color:rgba(17,24,39,.85); }
+    .bar small{ font-size:12px; color:var(--muted); font-weight:800; }
+
+    /* MEDIA / FOOTER-ish */
+    .media-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:18px;
+    }
+    .media-card{
+      background:#fff;
+      border-radius:24px;
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:260px;
+    }
+    .thumb{
+      height:160px;
+      background: linear-gradient(120deg, rgba(47,71,198,.14), rgba(16,185,129,.10));
+      position:relative;
+    }
+    .thumb::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.55), transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.35), transparent 45%);
+      opacity:.8;
+    }
+    .media-body{
+      padding:14px 16px 16px;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .media-body b{ letter-spacing:-.2px; }
+    .media-body p{ margin:0; color:var(--muted); font-weight:700; font-size:13px; }
+    .mini-actions{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:10px;
+      margin-top:18px;
+    }
+    .mini-box{
+      background:#fff;
+      border-radius:18px;
+      border:1px solid rgba(17,24,39,.08);
+      box-shadow: var(--shadow);
+      padding:12px;
+      font-weight:900;
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      cursor:pointer;
+    }
+    .mini-box:hover{ transform: translateY(-2px); }
+
+    footer{
+      background: #2f65d8;
+      color: rgba(255,255,255,.92);
+      padding:28px 0;
+      margin-top:30px;
+    }
+    footer .foot{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      font-weight:700;
+      font-size:13px;
+    }
+    footer small{ color: rgba(255,255,255,.78); font-weight:700; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .feature-grid{ grid-template-columns:1fr; }
+      .service-grid{ grid-template-columns: repeat(3, 1fr); }
+      .media-grid{ grid-template-columns:1fr; }
+      .navlinks{ display:none; } /* 모바일에선 메뉴 숨기고 햄버거 넣고 싶으면 JS로 */
+    }
+    @media (max-width: 520px){
+      .hero-title{ font-size:32px; }
+      .service-grid{ grid-template-columns: repeat(2, 1fr); }
+      .bar .stick{ width:54px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP NAV -->
+  <div class="topbar">
+    <div class="container">
+      <div class="row">
+        <a class="brand" href="#">
+          <span class="brand-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2l8 5v10l-8 5-8-5V7l8-5zm0 3.2L6 8v8l6 3.8 6-3.8V8l-6-2.8z"/></svg>
+          </span>
+          국민연금공단
+        </a>
+
+        <nav class="navlinks" aria-label="주요 메뉴">
+          <a href="#quick">민원서비스</a>
+          <a href="#feature">자주찾는</a>
+          <a href="#services">내연금</a>
+          <a href="#data">통계/공시</a>
+          <a href="#media">소식</a>
+        </nav>
+
+        <div class="top-utils">
+          <button class="util-btn" type="button">언어</button>
+          <button class="util-btn" type="button">로그인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-title">확실히, 함께<br/>든든한 노후</h1>
+          <p class="hero-sub">
+            국민연금 조회, 증명서 발급, 민원 신청까지. 필요한 걸 한 화면에서 빠르게 찾도록 (사람이 하기 귀찮으니까) 정리해둠.
+          </p>
+          <div class="hero-cta">
+            <button class="btn primary" type="button">내 연금 확인</button>
+            <button class="btn ghost" type="button">증명서 발급</button>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="search-card" role="search">
+            <div class="mascot" title="신뢰의 아이콘(마스코트 자리)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3c3.6 0 6.5 2.9 6.5 6.5S15.6 16 12 16 5.5 13.1 5.5 9.5 8.4 3 12 3Z" stroke="rgba(47,71,198,.9)" stroke-width="1.8"/>
+                <path d="M7.2 20.5c1.4-2.1 3.1-3.2 4.8-3.2s3.4 1.1 4.8 3.2" stroke="rgba(47,71,198,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.2 9.6h.1M14.7 9.6h.1" stroke="rgba(47,71,198,.9)" stroke-width="2.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <input class="search-input" placeholder="무엇을 도와드릴까요? (예: 가입내역, 예상연금, 증명서)" />
+            <button class="icon-btn" type="button" title="검색">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="rgba(17,24,39,.8)" stroke-width="2"/>
+                <path d="M16.5 16.5 21 21" stroke="rgba(17,24,39,.8)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="login-card">
+            <div class="login-head">
+              <strong>간편 바로가기</strong>
+              <span class="login-meta">자주 쓰는 기능</span>
+            </div>
+            <div class="login-grid">
+              <div class="chip">가입내역 <span>조회</span></div>
+              <div class="chip">예상연금 <span>계산</span></div>
+              <div class="chip">민원신청 <span>접수</span></div>
+              <div class="chip">증명서 <span>발급</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUICK ICON ROW -->
+  <section id="quick" class="quick-wrap">
+    <div class="container">
+      <div class="quick-top">
+        <span class="pill">주요 서비스</span>
+        <span class="pill" style="background:#eefbf5;border-color:rgba(16,185,129,.22);color:#0f766e;">민원/신청</span>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="quickbar" aria-label="아이콘 바로가기">
+        <!-- 6~8개 정도가 와이어프레임 느낌 -->
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16v12H4V7Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/><path d="M8 7V5h8v2" stroke="rgba(47,71,198,.9)" stroke-width="2"/></svg></div>
+          <div class="qtext"><b>민원서류</b><small>발급</small></div>
+        </div>
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-4.4 7-11V6l-7-3-7 3v4c0 6.6 7 11 7 11Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/></svg></div>
+          <div class="qtext"><b>내 연금</b><small>조회</small></div>
+        </div>
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V4h16v16H4Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/><path d="M7 8h10M7 12h10M7 16h7" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="qtext"><b>공지/공고</b><small>확인</small></div>
+        </div>
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div class="qtext"><b>신청</b><small>접수</small></div>
+        </div>
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18h12M7 6h10l-1 10H8L7 6Z" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div class="qtext"><b>상담/문의</b><small>연결</small></div>
+        </div>
+        <div class="qitem">
+          <div class="qicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 20h14V8l-7-4-7 4v12Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/></svg></div>
+          <div class="qtext"><b>지사찾기</b><small>안내</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE (2 cards) -->
+  <section id="feature" class="section alt">
+    <div class="container">
+      <h2 class="sec-title">국민연금이 더 쉽게, 더 가까이</h2>
+      <p class="sec-sub">자주 하는 일 2가지를 카드로 크게. 사람들이 읽을 확률을 0.3%라도 올리기 위함.</p>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-top">
+            <span class="badge">추천</span>
+            <div class="feature-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 14l4-4 4 4 4-4" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 19h16" stroke="rgba(17,24,39,.65)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <h3>예상연금 간편 계산</h3>
+          <p>입력은 최소, 결과는 최대. (현실도 그렇게 됐으면 좋겠다.)</p>
+          <div class="btnrow">
+            <button class="btn ghost" type="button">바로 계산하기</button>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-top">
+            <span class="badge">필수</span>
+            <div class="feature-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3h10v18H7V3Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/>
+                <path d="M9 7h6M9 11h6M9 15h4" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <h3>증명서 발급 한 번에</h3>
+          <p>클릭 수 줄여서 사람의 영혼을 보호합니다.</p>
+          <div class="btnrow">
+            <button class="btn ghost" type="button">발급 메뉴로</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES + TABS + GRID -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="sec-title">원하는 서비스를 빠르게 찾아요</h2>
+      <p class="sec-sub">카테고리 탭 + 카드 그리드. 와이어프레임 그 맛 그대로.</p>
+
+      <div class="tabs" role="tablist" aria-label="서비스 카테고리">
+        <button class="tab" role="tab" aria-selected="true" data-tab="all">전체</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="my">내 연금</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="civil">민원/신청</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="info">안내/자료</button>
+      </div>
+
+      <div class="service-grid" id="serviceGrid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- BIG DATA / CHART -->
+  <section id="data" class="big-visual">
+    <div class="container">
+      <h2>국민연금 데이터, 한 눈에 보기</h2>
+
+      <div class="panel">
+        <div class="panel-top">
+          <div style="font-weight:900; letter-spacing:-.3px;">핵심 지표</div>
+          <div class="filters">
+            <select class="select" id="yearSel" aria-label="연도 선택">
+              <option>2025</option>
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
+            </select>
+            <select class="select" id="typeSel" aria-label="지표 선택">
+              <option>가입자</option>
+              <option>수급자</option>
+              <option>기금규모</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chart" aria-label="막대 차트(샘플)">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+            <div>
+              <b style="font-size:16px;">지표 추이</b>
+              <div style="color:var(--muted); font-weight:800; font-size:12px; margin-top:4px;">
+                실제 데이터 연동 전까지는 ‘그럴듯한’ 막대기입니다.
+              </div>
+            </div>
+            <div style="color:var(--muted); font-weight:900; font-size:12px;">단위: (예시)</div>
+          </div>
+
+          <div class="bars" id="bars">
+            <div class="bar">
+              <div class="stick" style="height:60px"></div>
+              <b>Q1</b><small>기준</small>
+            </div>
+            <div class="bar">
+              <div class="stick" style="height:95px"></div>
+              <b>Q2</b><small>증가</small>
+            </div>
+            <div class="bar">
+              <div class="stick" style="height:130px"></div>
+              <b>Q3</b><small>유지</small>
+            </div>
+            <div class="bar">
+              <div class="stick" style="height:165px"></div>
+              <b>Q4</b><small>최대</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section id="media" class="section cream">
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px;">
+        <h2 class="sec-title" style="margin:0;">따뜻한 소식과 안내</h2>
+        <span aria-hidden="true" style="width:44px;height:44px;border-radius:18px;background:rgba(47,71,198,.08);border:1px solid rgba(47,71,198,.16);display:grid;place-items:center;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 21s7-4.4 7-11V6l-7-3-7 3v4c0 6.6 7 11 7 11Z" stroke="rgba(47,71,198,.9)" stroke-width="2"/>
+            <path d="M9.5 12.2 11 13.7 14.6 10.2" stroke="rgba(16,185,129,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <p class="sec-sub">영상/카드 영역 2개 + 아래 작은 박스 3개. 와이어프레임 그대로 복붙한 구조.</p>
+
+      <div class="media-grid">
+        <article class="media-card">
+          <div class="thumb"></div>
+          <div class="media-body">
+            <b>국민연금 제도 안내 카드뉴스</b>
+            <p>핵심만 짧게. 사람들이 스크롤하다가 멈출 확률은 낮지만, 그래도 시도는 해야지.</p>
+          </div>
+        </article>
+
+        <article class="media-card">
+          <div class="thumb" style="background:linear-gradient(120deg, rgba(245,158,11,.16), rgba(47,71,198,.12));"></div>
+          <div class="media-body">
+            <b>홍보/캠페인 영상</b>
+            <p>썸네일 + CTA 버튼 추가하면 완성. 지금은 ‘그럴듯함’만 담당.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="mini-actions">
+        <div class="mini-box">민원 안내</div>
+        <div class="mini-box">자주 묻는 질문</div>
+        <div class="mini-box">콜센터/챗봇</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <div style="font-weight:900;">국민연금공단 (시안)</div>
+          <small>© NPS. This is a wireframe-based mock page.</small>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#" style="text-decoration:underline; text-underline-offset:4px;">이용약관</a>
+          <a href="#" style="text-decoration:underline; text-underline-offset:4px;">개인정보처리방침</a>
+          <a href="#" style="text-decoration:underline; text-underline-offset:4px;">접근성</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 서비스 카드 데이터 (탭 필터용)
+    const SERVICES = [
+      { title:"가입내역 조회", desc:"내 정보", tab:"my" },
+      { title:"예상연금 계산", desc:"내 연금", tab:"my" },
+      { title:"수급자격 확인", desc:"내 연금", tab:"my" },
+      { title:"증명서 발급", desc:"민원", tab:"civil" },
+      { title:"민원 신청", desc:"접수", tab:"civil" },
+      { title:"서식 다운로드", desc:"민원", tab:"civil" },
+      { title:"제도 안내", desc:"가이드", tab:"info" },
+      { title:"기금운용 공시", desc:"자료", tab:"info" },
+      { title:"통계 자료", desc:"데이터", tab:"info" },
+      { title:"지사 찾기", desc:"위치", tab:"info" },
+      { title:"공지사항", desc:"소식", tab:"info" },
+      { title:"FAQ", desc:"도움말", tab:"info" },
+    ];
+
+    const grid = document.getElementById("serviceGrid");
+    const tabs = Array.from(document.querySelectorAll(".tab"));
+
+    function iconSVG(){
+      return `
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 8h12M6 12h8M6 16h10" stroke="rgba(47,71,198,.9)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      `;
+    }
+
+    function render(tab){
+      const list = SERVICES.filter(s => tab === "all" ? true : s.tab === tab);
+      grid.innerHTML = list.map(s => `
+        <div class="service-card" role="button" tabindex="0">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div class="mini">${iconSVG()}</div>
+            <small>${s.tab.toUpperCase()}</small>
+          </div>
+          <div>
+            <b>${s.title}</b><br/>
+            <small>${s.desc}</small>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener("click", () => {
+        tabs.forEach(b => b.setAttribute("aria-selected", "false"));
+        btn.setAttribute("aria-selected", "true");
+        render(btn.dataset.tab);
+      });
+    });
+
+    render("all");
+
+    // 차트 막대 랜덤 변경 (데모)
+    const yearSel = document.getElementById("yearSel");
+    const typeSel = document.getElementById("typeSel");
+    const bars = Array.from(document.querySelectorAll("#bars .stick"));
+
+    function reseed(){
+      bars.forEach((el, i) => {
+        const base = 60 + i*35;
+        const jitter = Math.floor(Math.random()*26) - 10;
+        el.style.height = Math.max(40, base + jitter) + "px";
+      });
+    }
+    yearSel.addEventListener("change", reseed);
+    typeSel.addEventListener("change", reseed);
+  </script>
+</body>
+</html>
